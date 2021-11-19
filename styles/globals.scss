@@ -1,3 +1,4 @@
+@import "variables.module.scss";
 html,
 body {
   padding: 0;
@@ -13,4 +14,11 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/**
+ 修改进度条颜色
+ */
+#nprogress .bar {
+    background: $base-color !important;
 }
