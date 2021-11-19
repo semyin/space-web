@@ -15,11 +15,13 @@ export default function Index() {
 }
 
 Index.getLayout = function getLayout(page: ReactElement) {
+  console.log(page.props)
   return (
     <Layout title={'首页'}>
       <>
         <Header/>
         {page}
+        <div>{page.props.text}</div>
         <Footer/>
       </>
     </Layout>
