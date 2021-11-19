@@ -1,6 +1,6 @@
 /**
  * @author semyin
- * @description 运行时打语音
+ * @description 运行时打印环境
  */
 import { currentEnv} from "@/config/environment";
 
