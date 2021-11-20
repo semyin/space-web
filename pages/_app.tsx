@@ -1,7 +1,7 @@
 import '../styles/globals.scss'
 import type {ReactElement, ReactNode} from "react";
 import type {AppProps} from 'next/app'
-import type {GetServerSideProps, NextPage} from "next";
+import type {NextPage} from "next";
 
 import doConsoleEnv from "@/utils/doConsoleEnv";
 import {useRouter} from "next/router";
@@ -9,6 +9,10 @@ import {useEffect} from "react";
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import {AppContext} from "next/dist/pages/_app";
+import UserContext from "@/store/user";
+import {IMenu, UserInfo} from "@/types";
+import {getMenuList} from "@/api";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -16,10 +20,11 @@ type NextPageWithLayout = NextPage & {
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout,
-  text: string
+  menu: Array<IMenu>,
+  userInfo: UserInfo
 }
 
-function MyApp({Component, pageProps, text}: AppPropsWithLayout) {
+function MyApp({Component, pageProps, menu = [], userInfo, ...other}: AppPropsWithLayout) {
 
   doConsoleEnv()
 
@@ -31,28 +36,36 @@ function MyApp({Component, pageProps, text}: AppPropsWithLayout) {
     router.events.on('routeChangeError', () => NProgress.done())
   }, [])
 
-  console.log(pageProps, text)
+  const getLayout = Component.getLayout ?? ((page: ReactElement, menu: Array<IMenu>) => page)
 
-  const getLayout = Component.getLayout ?? ((page) => page)
-
-  return getLayout(<Component {...pageProps} text={text}/>)
+  return getLayout(
+    (
+      <UserContext.Provider value={userInfo}>
+        <Component {...pageProps} />
+      </UserContext.Provider>
+    ),
+    menu
+  )
 
 }
 
-MyApp.getInitialProps = async () => {
-  console.log(1)
+MyApp.getInitialProps = async (context: AppContext) => {
+  const { route } = context.router
+  const cookie = context.ctx.req?.headers.cookie
+  console.log('current route is', route)
+  const res = await getMenuList()
+  const menuList = res?.data?.data || []
   return {
-    text: '1'
+    menu: menuList,
+    userInfo: {
+      userName: 'semyin',
+      loginAccount: '',
+      pic: '',
+      status: 1,
+      token: ''
+    }
+
   }
 }
-
-// export const getServerSideProps: GetServerSideProps = async (context) => {
-//   console.log(1)
-//   return {
-//     props: {
-//       text: '1'
-//     }
-//   }
-// }
 
 export default MyApp

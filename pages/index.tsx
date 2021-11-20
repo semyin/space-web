@@ -3,8 +3,10 @@ import Layout from "@/components/Layout/Layout";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import Link from 'next/link'
+import type {AppProps} from "next/app";
+import {IMenu} from "@/types";
 
-export default function Index() {
+export default function Page(props: AppProps) {
   return (
     <section>
       <Link href={'/p'}>
@@ -14,14 +16,12 @@ export default function Index() {
   )
 }
 
-Index.getLayout = function getLayout(page: ReactElement) {
-  console.log(page.props)
+Page.getLayout = function getLayout(page: ReactElement, menu: Array<IMenu>) {
   return (
     <Layout title={'首页'}>
       <>
-        <Header/>
+        <Header menu={menu}/>
         {page}
-        <div>{page.props.text}</div>
         <Footer/>
       </>
     </Layout>
