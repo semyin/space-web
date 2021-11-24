@@ -7,7 +7,7 @@ export const loginURL = domain + '/web/login'
 
 export const getMenuList = () => {
   return request({
-    url: articleTypeURL,
+    url: '/api/menu',
     method: 'get',
     headers: {
 

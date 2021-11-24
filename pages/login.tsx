@@ -2,10 +2,11 @@ import type {NextPage} from "next";
 import {ChangeEvent, useState} from "react";
 import {LoginForm} from "@/types";
 import {AppProps} from "next/app";
+import cookie from 'cookie'
 
 export default function Page(props: AppProps) {
 
-  console.log(props)
+  // console.log(props)
   const [loginAccount, setLoginAccount] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
