@@ -2,10 +2,10 @@
   "name": "space-web",
   "private": true,
   "scripts": {
-    "dev": "NEXT_PUBLIC_APP_ENV=dev next dev -p 4000",
+    "dev": "NEXT_PUBLIC_APP_ENV=dev next dev -p 5630",
     "build:test": "NEXT_PUBLIC_APP_ENV=test next build",
     "build": "NEXT_PUBLIC_APP_ENV=pro next build",
-    "start": "next start -p 4000",
+    "start": "next start -p 5630",
     "lint": "next lint"
   },
   "dependencies": {

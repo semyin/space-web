@@ -1,16 +1,12 @@
-import {domain} from "@/config/api";
-import request from "@/plugins/request";
+import {appDomain, requestPrefix} from "@/config/api";
 
-export const articleTypeURL = domain + '/web/articleTypes'
+export const clientApi = {
+  menu: '/web/articleTypes',
+  article: '/web/articles',
+  login: '/web/login'
+}
 
-export const loginURL = domain + '/web/login'
-
-export const getMenuList = () => {
-  return request({
-    url: '/api/menu',
-    method: 'get',
-    headers: {
-
-    }
-  })
+export const serverApi = {
+  menu: appDomain + requestPrefix + clientApi.menu,
+  article: appDomain + requestPrefix + clientApi.article
 }
