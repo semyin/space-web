@@ -4,7 +4,7 @@ const baseName: string = 'SEMYIN'
 
 const baseTitle: string = baseName +'\'s space'
 
-const cookiePrefix = toBase64('space-web')
+const cookiePrefix = toBase64('space-web') // c3BhY2Utd2Vi
 
 export {
   baseName,
