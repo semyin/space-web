@@ -10,11 +10,12 @@ import {useEffect} from "react";
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import {AppContext} from "next/dist/pages/_app";
-import UserContext from "@/store/user";
-import {IMenu, UserInfo} from "@/types";
-import cookie from 'cookie'
+import {IInitData, IMenu, IUserInfo} from "@/types";
 import request from "@/plugins/request";
 import {serverApi} from "@/api";
+import {CookiesProvider, useCookies} from "react-cookie";
+import {parseCookies} from "@/utils/parseCookies";
+import {cookiePrefix} from "@/config/constant";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -22,11 +23,10 @@ type NextPageWithLayout = NextPage & {
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout,
-  menu: Array<IMenu>,
-  userInfo: UserInfo
+  initData: IInitData
 }
 
-function MyApp({Component, pageProps, menu = [], userInfo, ...other}: AppPropsWithLayout) {
+function MyApp({Component, pageProps, initData, ...other}: AppPropsWithLayout) {
 
   doConsoleEnv()
 
@@ -38,15 +38,15 @@ function MyApp({Component, pageProps, menu = [], userInfo, ...other}: AppPropsWi
     router.events.on('routeChangeError', () => NProgress.done())
   }, [])
 
-  const getLayout = Component.getLayout ?? ((page: ReactElement, menu: Array<IMenu>) => page)
+  const getLayout = Component.getLayout ?? ((page: ReactElement, initData: IInitData) => page)
 
   return getLayout(
     (
-      <UserContext.Provider value={userInfo}>
-        <Component {...pageProps} />
-      </UserContext.Provider>
+      <CookiesProvider>
+        <Component {...pageProps}/>
+      </CookiesProvider>
     ),
-    menu
+    initData
   )
 
 }
@@ -62,12 +62,19 @@ async function getMenuList() {
 
 MyApp.getInitialProps = async (context: AppContext) => {
   const menuList = await getMenuList()
-  const parsedCookie = cookie.parse(context.ctx.req?.headers.cookie || '')
-  const {token, userName, loginAccount, pic, status} = parsedCookie
+  const parsedCookie = parseCookies(context)
+  const userInfo = parsedCookie[cookiePrefix]
+  let token: any
+  try {
+    token = JSON.parse(userInfo).token
+  } catch (e) {
+    token = null
+  }
+  const loginStatus = !!token
   return {
-    menu: menuList,
-    userInfo: {
-      token, userName, loginAccount, pic, status
+    initData: {
+      menu: menuList,
+      loginStatus
     }
   }
 }

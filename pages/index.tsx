@@ -1,12 +1,16 @@
-import {ReactElement} from "react";
+import {ReactElement, useContext, useEffect} from "react";
 import Layout from "@/components/Layout/Layout";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import Link from 'next/link'
 import type {AppProps} from "next/app";
-import {IMenu} from "@/types";
+import {GetServerSideProps} from "next";
+import {useCookies} from "react-cookie";
+import {cookiePrefix} from "@/config/constant";
+import {IInitData} from "@/types";
 
 export default function Page(props: AppProps) {
+
   return (
     <section>
       <Link href={'/p'}>
@@ -16,11 +20,21 @@ export default function Page(props: AppProps) {
   )
 }
 
-Page.getLayout = function getLayout(page: ReactElement, menu: Array<IMenu>) {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return {
+    props: {
+
+    }
+  }
+}
+
+Page.getLayout = function GetLayout(page: ReactElement, initData: IInitData) {
+  const {loginStatus, menu} = initData
+  const [cookies] = useCookies([cookiePrefix])
   return (
     <Layout title={'首页'}>
       <>
-        <Header menu={menu}/>
+        <Header menu={menu} loginStatus={loginStatus}/>
         {page}
         <Footer/>
       </>

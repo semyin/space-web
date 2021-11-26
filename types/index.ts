@@ -10,15 +10,20 @@ export declare interface IMenu {
   typeName: string
 }
 
-export declare interface LoginForm {
+export declare interface ILoginForm {
   loginAccount: string,
   password: string
 }
 
-export declare interface UserInfo {
+export declare interface IUserInfo {
   userName: string,
   loginAccount: string,
   pic: string,
   status: number,
   token: string
+}
+
+export declare interface IInitData {
+  menu: IMenu[],
+  loginStatus: boolean
 }
