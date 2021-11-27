@@ -6,8 +6,11 @@ const baseTitle: string = baseName +'\'s space'
 
 const cookiePrefix = toBase64('space-web') // c3BhY2Utd2Vi
 
+const Authorization = 'Authorization'
+
 export {
   baseName,
   baseTitle,
-  cookiePrefix
+  cookiePrefix,
+  Authorization
 }

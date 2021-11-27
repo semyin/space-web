@@ -1,10 +1,9 @@
 import cookie from "cookie"
-import {AppContext} from "next/dist/pages/_app";
+import {IncomingMessage} from "http";
 
-export function parseCookies(context: AppContext):
+export function parseCookies(req: IncomingMessage | undefined):
   {
     [key: string]: string
-  }
-{
-  return cookie.parse(context.ctx.req ? context.ctx.req.headers.cookie || '' : document.cookie)
+  } {
+  return cookie.parse(req ? req.headers.cookie || '' : document.cookie)
 }

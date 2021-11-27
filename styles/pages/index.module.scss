@@ -3,4 +3,23 @@
 
 .home {
   padding: 70px 0 60px 0;
+
+  .wrap {
+    padding: 20px  0 0 0;
+    width: 1100px;
+    @include flex(center, center);
+    margin: 0 auto;
+
+    .left {
+      width: 800px;
+      background: white;
+      //box-shadow: 0 2px 9px #00000014;
+    }
+    .right {
+      margin-left: 20px;
+      width: 280px;
+      background: white;
+      //box-shadow: 0 2px 9px #00000014;
+    }
+  }
 }

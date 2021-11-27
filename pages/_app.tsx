@@ -16,6 +16,7 @@ import {serverApi} from "@/api";
 import {CookiesProvider, useCookies} from "react-cookie";
 import {parseCookies} from "@/utils/parseCookies";
 import {cookiePrefix} from "@/config/constant";
+import {getToken} from "@/utils/auth";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -62,14 +63,7 @@ async function getMenuList() {
 
 MyApp.getInitialProps = async (context: AppContext) => {
   const menuList = await getMenuList()
-  const parsedCookie = parseCookies(context)
-  const userInfo = parsedCookie[cookiePrefix]
-  let token: any
-  try {
-    token = JSON.parse(userInfo).token
-  } catch (e) {
-    token = null
-  }
+  const token = getToken(context.ctx.req)
   const loginStatus = !!token
   return {
     initData: {
