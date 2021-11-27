@@ -1,0 +1,47 @@
+@import "../mixin.scss";
+@import "../variables.module.scss";
+
+.footer {
+  width: 100%;
+  background: #555;
+  color: white;
+  position: fixed;
+  bottom: 0;
+
+  .bg {
+    width: 1100px;
+    margin: 0 auto;
+    height: 60px;
+    line-height: 60px;
+    @include flex(center, space-between);
+
+    .left {
+      @include flex(center, center);
+
+      .logo {
+        font-size: 20px;
+      }
+
+      .copyRight {
+        font-size: 14px;
+        margin-left: 30px;
+      }
+
+      .icp {
+        font-size: 14px;
+        margin-left: 30px;
+      }
+    }
+
+    .right {
+      a {
+        text-decoration: underline;
+      }
+
+      a:hover {
+
+        color: $base-color;
+      }
+    }
+  }
+}

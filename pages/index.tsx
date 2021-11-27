@@ -8,11 +8,12 @@ import {GetServerSideProps} from "next";
 import {useCookies} from "react-cookie";
 import {cookiePrefix} from "@/config/constant";
 import {IInitData} from "@/types";
+import style from '@/styles/pages/index.module.scss'
 
 export default function Page(props: AppProps) {
 
   return (
-    <section>
+    <section className={style.home}>
       <Link href={'/p'}>
         <a>跳转</a>
       </Link>
