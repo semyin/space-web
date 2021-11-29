@@ -7,17 +7,95 @@
   .wrap {
     padding: 20px  0 0 0;
     width: 1100px;
-    @include flex(center, center);
+    @include flex(flex-start, center);
     margin: 0 auto;
 
     .left {
-      width: 800px;
-      background: white;
+      width: 770px;
+      //background: white;
       //box-shadow: 0 2px 9px #00000014;
+
+      .articleList {
+
+
+      }
+
+      .item {
+        margin-bottom: 12px;
+        @include flex(flex-start, flex-start);
+        background: white;
+        padding: 15px;
+        //border-bottom: 1px solid #f0f0f0;
+        border-radius: 5px;
+        box-shadow: 0 2px 9px #00000014;
+        transition: all linear .2s;
+        cursor: pointer;
+        &:hover {
+          background: #fff;
+          box-shadow: 1px 2px 12px 1px #00000026;
+          transition: all linear .2s;
+          //box-shadow: 0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 6px 4px #00000017;
+        }
+      }
+
+      .coverImg {
+        margin-right: 20px;
+
+        img {
+          border-radius: 5px;
+          width: 200px;
+        }
+      }
+
+      .content {
+        //min-width: 520px;
+        width: 100%;
+      }
+      .title {
+        font-weight: normal;
+        color: #555555;
+        &:hover {
+          color: $base-color;
+        }
+      }
+
+      .brief {
+        margin-top: 20px;
+        font-size: 14px;
+        height: 40px;
+        color: #666;
+      }
+
+      .bottom {
+        //margin-top: 20px;
+        @include flex(center, space-between);
+        .bottomLeft {
+          @include flex(center, center);
+          .time {
+            font-size: 14px;
+            color: #24292e;
+          }
+
+          .tagList {
+            margin-left: 10px;
+            font-size: 14px;
+            @include flex(center, center);
+            .tag {
+              margin-right: 10px;
+            }
+          }
+        }
+        .bottomRight {
+          span {
+
+          }
+        }
+
+      }
     }
     .right {
       margin-left: 20px;
-      width: 280px;
+      width: 310px;
       background: white;
       //box-shadow: 0 2px 9px #00000014;
     }

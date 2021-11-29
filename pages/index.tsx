@@ -13,6 +13,7 @@ import {parseCookies} from "@/utils/parseCookies";
 import {getRequestAuthHeader} from "@/utils/auth";
 import request from "@/plugins/request";
 import {serverApi} from "@/api";
+import {format} from 'date-fns'
 
 
 type Props = {
@@ -29,40 +30,47 @@ export default function Page({ articleList }: Props) {
             {
               articleList.map(item => {
                 return (
-                  <div key={item.id} className={style.item}>
-                    <div className={style.coverImg}>
-                      <img src={item.coverImg} alt=""/>
-                    </div>
-                    <div className={style.content}>
-                      <div className={style.title}>
-                        {item.title}
-                      </div>
-                      <div className={style.brief}>
-                        {item.brief}
-                      </div>
-                      <div className={style.bottom}>
-                        <div className={style.bottomLeft}>
-                          <div className={style.time}>
-                            {item.createdAt}
+                  <Link key={item.id} href={`/post/${item.id}`}>
+                    <div className={style.item}>
+                      {
+                        item.coverImg ?
+                          (<div className={style.coverImg}>
+                            <img src={item.coverImg} alt=""/>
+                          </div>)
+                          : ''
+                      }
+                      <div className={style.content}>
+                        <h3 className={`${style.title} overflow-one-line`}>
+                          {item.title}
+                        </h3>
+                        <div className={style.brief}>
+                          {item.brief}
+                        </div>
+                        <div className={style.bottom}>
+                          <div className={style.bottomLeft}>
+                            <div className={style.time}>
+                              {format(item.createdAt, 'yyyy-MM-dd HH:mm')}
+                            </div>
+                            <div className={style.tagList}>
+                              {
+                                item.tagList.map(tag => {
+                                  return (
+                                    <div className={style.tag} key={tag.id}>{tag.tagName}</div>
+                                  )
+                                })
+                              }
+                            </div>
                           </div>
-                          <div className={style.tagList}>
-                            {
-                              item.tagList.map(tag => {
-                                return (
-                                  <div key={tag.id}>{tag.tagName}</div>
-                                )
-                              })
-                            }
+                          <div className={style.bottomRight}>
+                            <span>{item.viewNum}</span>
+                            <span>{item.commentNum}</span>
                           </div>
                         </div>
-                        <div className={style.bottomRight}>
-                          <span>{item.viewNum}</span>
-                          <span>{item.commentNum}</span>
-                        </div>
                       </div>
-                    </div>
 
-                  </div>
+                    </div>
+                  </Link>
+
                 )
               })
             }
@@ -104,7 +112,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 
 Page.getLayout = function GetLayout(page: ReactElement, initData: IInitData) {
   const {loginStatus, menu} = initData
-  const [cookies] = useCookies([cookiePrefix])
+  // const [cookies] = useCookies([cookiePrefix])
   return (
     <Layout title={'首页'}>
       <>
