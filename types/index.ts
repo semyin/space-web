@@ -55,3 +55,9 @@ export declare interface IArticle {
   viewNum: number,
   commentNum: number
 }
+
+export declare interface IHotArticle {
+  title: '',
+  coverImg: string,
+  viewNum: number,
+}

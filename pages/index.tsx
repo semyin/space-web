@@ -7,7 +7,7 @@ import type {AppProps} from "next/app";
 import {GetServerSideProps} from "next";
 import {useCookies} from "react-cookie";
 import {cookiePrefix} from "@/config/constant";
-import {IArticle, IInitData, IPage} from "@/types";
+import {IArticle, IHotArticle, IInitData, IPage} from "@/types";
 import style from '@/styles/pages/index.module.scss'
 import {parseCookies} from "@/utils/parseCookies";
 import {getRequestAuthHeader} from "@/utils/auth";
@@ -17,11 +17,13 @@ import {format} from 'date-fns'
 
 
 type Props = {
-  articleList: IArticle[]
+  articleList: IArticle[],
+  hotArticleList: IHotArticle[]
 }
 
-export default function Page({ articleList }: Props) {
+export default function Page({ articleList, hotArticleList }: Props) {
   console.log(articleList)
+  console.log(hotArticleList)
   return (
     <section className={style.home}>
       <div className={style.wrap}>
@@ -81,7 +83,27 @@ export default function Page({ articleList }: Props) {
           </div>
         </div>
         <div className={style.right}>
-          右边
+          <div className={style.rightHot}>
+            <h3>热门文章</h3>
+            <div className={style.hotList}>
+              {
+                hotArticleList.map((item, index) => {
+                  return (
+                    <div key={index} className={style.hotItem}>
+                      {
+                        item.coverImg ? (<img className={style.hotCoverImg} src={item.coverImg} alt=""/>) : ''
+                      }
+                      <div className={style.hotItemRight}>
+                        <h4 className={style.hotItemTitle}>{item.title}</h4>
+                        <p>{item.viewNum} 阅读</p>
+                      </div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+          <div className={style.rightComment}></div>
         </div>
       </div>
 
@@ -100,22 +122,33 @@ async function getArticleList(params: IPage) {
   }
 }
 
+async function getHotArticleList() {
+  try {
+    const res = await request.get(serverApi.hotArticle)
+    return res.data.data || []
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const params: IPage = {
     currentPage: 1,
     pageSize: 10
   }
   const articleList = await getArticleList(params)
+  const hotArticleList = await getHotArticleList()
+  console.log(hotArticleList)
   return {
     props: {
-      articleList
+      articleList,
+      hotArticleList
     }
   }
 }
 
 Page.getLayout = function GetLayout(page: ReactElement, initData: IInitData) {
   const {loginStatus, menu} = initData
-  // const [cookies] = useCookies([cookiePrefix])
   return (
     <Layout title={'首页'}>
       <>
