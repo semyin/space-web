@@ -36,3 +36,10 @@ body {
   text-overflow:ellipsis;
   white-space: nowrap;
 }
+
+.overflow-2-line {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}

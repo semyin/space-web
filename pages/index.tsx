@@ -43,27 +43,30 @@ export default function Page({ articleList }: Props) {
                         <h3 className={`${style.title} overflow-one-line`}>
                           {item.title}
                         </h3>
-                        <div className={style.brief}>
+                        <div className={`${style.brief} overflow-2-line`}>
                           {item.brief}
                         </div>
                         <div className={style.bottom}>
                           <div className={style.bottomLeft}>
                             <div className={style.time}>
-                              {format(item.createdAt, 'yyyy-MM-dd HH:mm')}
+                              <img className={style.timeIcon} src='/assets/img/time.svg' alt=""/>{format(item.createdAt, 'yyyy-MM-dd HH:mm')}
                             </div>
                             <div className={style.tagList}>
+                              <img className={style.tagIcon} src='/assets/img/tag.svg' alt=""/>
                               {
                                 item.tagList.map(tag => {
                                   return (
-                                    <div className={style.tag} key={tag.id}>{tag.tagName}</div>
+                                    <div className={style.tag} key={tag.id}>
+                                      {tag.tagName}
+                                    </div>
                                   )
                                 })
                               }
                             </div>
                           </div>
                           <div className={style.bottomRight}>
-                            <span>{item.viewNum}</span>
-                            <span>{item.commentNum}</span>
+                            <span><img src="/assets/img/view.svg" alt=""/>{item.viewNum}</span>
+                            <span><img src="/assets/img/comment.svg" alt=""/>{item.commentNum}</span>
                           </div>
                         </div>
                       </div>
