@@ -114,7 +114,6 @@ export default function Page({ articleList, hotArticleList }: Props) {
 }
 
 async function getArticleList(params: IPage) {
-  console.log('process.browser', process.browser)
   let res: [] = []
   try {
     const result = await request.get(api.article, {
