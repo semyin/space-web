@@ -57,7 +57,8 @@ export declare interface IArticle {
 }
 
 export declare interface IHotArticle {
-  title: '',
+  id: string,
+  title: string,
   coverImg: string,
   viewNum: number,
 }

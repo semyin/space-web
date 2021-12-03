@@ -128,23 +128,50 @@
       width: 310px;
       background: white;
       .rightHot {
-        h3 {
-
+        padding: 15px;
+        .rightHotTitle {
+          font-size: 16px;
+          color: $base-color;
+          @include flex(center, flex-start);
+          p {
+            width: 4px;
+            height: 18px;
+            background: $base-color;
+            margin-right: 4px;
+          }
         }
       }
 
       .hotList {
+        margin-top: 10px;
         .hotItem {
+          margin-top: 10px;
+          @include flex(center, flex-start);
+          &:hover {
+            .hotItemRight h4 {
+              color: $base-color;
+            }
+          }
           .hotCoverImg {
-
+            width: 90px;
+            height: 60px;
+            object-fit: cover;
           }
 
           .hotItemRight {
+            margin-left: 10px;
             h4 {
-
+              word-break: break-word;
+              max-width: 180px;
+              height: 40px;
+              line-height: 20px;
+              font-size: 14px;
+              font-weight: normal;
+              color: #333;
             }
             p {
-
+              color: #999;
+              font-size: 12px;
             }
           }
         }

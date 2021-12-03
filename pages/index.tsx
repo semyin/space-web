@@ -81,26 +81,31 @@ export default function Page({ articleList, hotArticleList }: Props) {
         </div>
         <div className={style.right}>
           <div className={style.rightHot}>
-            <h3>热门文章</h3>
+            <div className={style.rightHotTitle}><p></p>热门文章</div>
             <div className={style.hotList}>
               {
                 hotArticleList.map((item, index) => {
                   return (
-                    <div key={index} className={style.hotItem}>
-                      {
-                        item.coverImg ? (<img className={style.hotCoverImg} src={item.coverImg} alt=""/>) : ''
-                      }
-                      <div className={style.hotItemRight}>
-                        <h4 className={style.hotItemTitle}>{item.title}</h4>
-                        <p>{item.viewNum} 阅读</p>
+                    <Link key={index} href={`/post/${item.id}`}>
+                      <div  className={`${style.hotItem} cursor-pointer`}>
+                        {
+                          item.coverImg ? (<img className={style.hotCoverImg} src={item.coverImg} alt=""/>) : ''
+                        }
+                        <div className={style.hotItemRight}>
+                          <h4 className='overflow-2-line'>{item.title}</h4>
+                          <p>{item.viewNum} 阅读</p>
+                        </div>
                       </div>
-                    </div>
+                    </Link>
+
                   )
                 })
               }
             </div>
           </div>
-          <div className={style.rightComment}></div>
+          <div className={style.rightComment}>
+
+          </div>
         </div>
       </div>
 
