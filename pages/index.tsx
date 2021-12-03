@@ -1,4 +1,4 @@
-import {ReactElement, useContext, useEffect} from "react";
+import {ReactElement} from "react";
 import Layout from "@/components/Layout/Layout";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
@@ -80,7 +80,7 @@ export default function Page({ articleList, hotArticleList, latestCommentList, i
         </div>
         <div className={style.right}>
           <div className={style.rightHot}>
-            <div className={style.rightHotTitle}><p></p>热门文章</div>
+            <div className={style.rightHotTitle}><p/>热门文章</div>
             <div className={style.hotList}>
               {
                 hotArticleList.map((item, index) => {
@@ -103,7 +103,7 @@ export default function Page({ articleList, hotArticleList, latestCommentList, i
             </div>
           </div>
           <div className={style.rightComment}>
-            <div className={style.rightCommentTitle}><p></p>热门评论</div>
+            <div className={style.rightCommentTitle}><p/>热门评论</div>
             <div className={style.latestCommentList}>
               {
                 latestCommentList.map((item, index) => {
