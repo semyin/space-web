@@ -3,14 +3,9 @@ import Layout from "@/components/Layout/Layout";
 import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import Link from 'next/link'
-import type {AppProps} from "next/app";
 import {GetServerSideProps} from "next";
-import {useCookies} from "react-cookie";
-import {cookiePrefix} from "@/config/constant";
 import {IArticle, IHotArticle, IInitData, IPage} from "@/types";
 import style from '@/styles/pages/index.module.scss'
-import {parseCookies} from "@/utils/parseCookies";
-import {getRequestAuthHeader} from "@/utils/auth";
 import request from "@/plugins/request";
 import {api} from "@/api";
 import {format} from 'date-fns'
