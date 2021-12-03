@@ -126,19 +126,21 @@
     .right {
       margin-left: 20px;
       width: 310px;
-      background: white;
-      .rightHot {
+
+      // right public
+      .rightHot, .rightComment {
         padding: 15px;
-        .rightHotTitle {
-          font-size: 16px;
-          color: $base-color;
-          @include flex(center, flex-start);
-          p {
-            width: 4px;
-            height: 18px;
-            background: $base-color;
-            margin-right: 4px;
-          }
+        background: white;
+      }
+      .rightHotTitle, .rightCommentTitle {
+        font-size: 16px;
+        color: $base-color;
+        @include flex(center, flex-start);
+        p {
+          width: 4px;
+          height: 18px;
+          background: $base-color;
+          margin-right: 4px;
         }
       }
 
@@ -174,6 +176,24 @@
               font-size: 12px;
             }
           }
+        }
+      }
+
+      .rightComment {
+        margin-top: 20px;
+
+        .rightCommentTitle {
+          margin-bottom: 20px;
+        }
+
+        .latestCommentItem {
+          margin-top: 10px;
+          border-radius: 3px;
+          word-break: break-all;
+          padding: 15px;
+          background: #f7f7f7;
+          color: #666;
+          font-size: 14px;
         }
       }
     }

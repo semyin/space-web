@@ -62,3 +62,10 @@ export declare interface IHotArticle {
   coverImg: string,
   viewNum: number,
 }
+
+export declare interface ILatestComment {
+  targetId: string,
+  targetType: number,
+  content: string,
+  created_at: number
+}

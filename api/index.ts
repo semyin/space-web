@@ -12,5 +12,6 @@ export const api = {
   menu: base + '/web/articleTypes',
   article: base + '/web/articles',
   login: base + '/web/login',
-  hotArticle: base + '/web/hot/articles'
+  hotArticle: base + '/web/hot/articles',
+  latestComment: base + '/web/comments/latest'
 }

@@ -4,7 +4,7 @@ import Header from "@/components/Layout/Header";
 import Footer from "@/components/Layout/Footer";
 import Link from 'next/link'
 import {GetServerSideProps} from "next";
-import {IArticle, IHotArticle, IInitData, IPage} from "@/types";
+import {IArticle, IHotArticle, IInitData, ILatestComment, IPage} from "@/types";
 import style from '@/styles/pages/index.module.scss'
 import request from "@/plugins/request";
 import {api} from "@/api";
@@ -13,10 +13,11 @@ import {format} from 'date-fns'
 
 type Props = {
   articleList: IArticle[],
-  hotArticleList: IHotArticle[]
+  hotArticleList: IHotArticle[],
+  latestCommentList: ILatestComment[]
 }
 
-export default function Page({ articleList, hotArticleList }: Props) {
+export default function Page({ articleList, hotArticleList, latestCommentList }: Props) {
   useEffect(() => {
     // request.get('/web/articles')
     getArticleList({currentPage: 2, pageSize: 10})
@@ -104,7 +105,18 @@ export default function Page({ articleList, hotArticleList }: Props) {
             </div>
           </div>
           <div className={style.rightComment}>
-
+            <div className={style.rightCommentTitle}><p></p>热门评论</div>
+            <div className={style.latestCommentList}>
+              {
+                latestCommentList.map((item, index) => {
+                  return (
+                    <div key={index} className={style.latestCommentItem}>
+                      {item.content}
+                    </div>
+                  )
+                })
+              }
+            </div>
           </div>
         </div>
       </div>
@@ -137,6 +149,17 @@ async function getHotArticleList() {
   return res
 }
 
+async function getLatestComment() {
+  let res: [] = []
+  try {
+    const result = await request.get(api.latestComment)
+    res =  result.data.data || []
+  } catch (e) {
+    console.log(e)
+  }
+  return res
+}
+
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const params: IPage = {
     currentPage: 1,
@@ -144,10 +167,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const articleList = await getArticleList(params)
   const hotArticleList = await getHotArticleList()
+  const latestCommentList= await getLatestComment()
   return {
     props: {
       articleList,
-      hotArticleList
+      hotArticleList,
+      latestCommentList
     }
   }
 }
