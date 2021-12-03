@@ -15,13 +15,11 @@ type Props = {
   articleList: IArticle[],
   hotArticleList: IHotArticle[],
   latestCommentList: ILatestComment[]
+  initData: IInitData
 }
 
-export default function Page({ articleList, hotArticleList, latestCommentList }: Props) {
-  useEffect(() => {
-    // request.get('/web/articles')
-    getArticleList({currentPage: 2, pageSize: 10})
-  }, [])
+export default function Page({ articleList, hotArticleList, latestCommentList, initData }: Props) {
+  console.log(initData)
   return (
     <section className={style.home}>
       <div className={style.wrap}>

@@ -44,7 +44,7 @@ function MyApp({Component, pageProps, initData, ...other}: AppPropsWithLayout) {
   return getLayout(
     (
       <CookiesProvider>
-        <Component {...pageProps}/>
+        <Component {...pageProps} initData={initData}/>
       </CookiesProvider>
     ),
     initData
