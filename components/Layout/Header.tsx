@@ -30,7 +30,7 @@ const Header = ({menu, loginStatus = false}: { menu: Array<IMenu>, loginStatus?:
             <ul className='list-style-none'>
               {menu.map(item => (
                 <li key={item.id}>
-                  <Link href={`/${item.id}`}>
+                  <Link href={`/articleTypes/${item.id}`}>
                     <a>{item.typeName}</a>
                   </Link>
                 </li>
