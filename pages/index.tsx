@@ -22,8 +22,6 @@ type Props = {
 }
 
 export default function Page({ articleList, hotArticleList }: Props) {
-  console.log(articleList)
-  console.log(hotArticleList)
   return (
     <section className={style.home}>
       <div className={style.wrap}>
@@ -112,23 +110,27 @@ export default function Page({ articleList, hotArticleList }: Props) {
 }
 
 async function getArticleList(params: IPage) {
+  let res: [] = []
   try {
-    const res = await request.get(serverApi.article, {
+    const result = await request.get(serverApi.article, {
       params
     })
-    return res.data.data || []
+    res = result.data.data || []
   } catch (e) {
     console.log(e)
   }
+  return res
 }
 
 async function getHotArticleList() {
+  let res: [] = []
   try {
-    const res = await request.get(serverApi.hotArticle)
-    return res.data.data || []
+    const result = await request.get(serverApi.hotArticle)
+    res =  result.data.data || []
   } catch (e) {
     console.log(e)
   }
+  return res
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -138,7 +140,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   }
   const articleList = await getArticleList(params)
   const hotArticleList = await getHotArticleList()
-  console.log(hotArticleList)
   return {
     props: {
       articleList,

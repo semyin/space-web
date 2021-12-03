@@ -2,6 +2,7 @@
  * @author semyin
  * @description 环境变量
  */
+const NODE_ENV: string | undefined = process.env.NODE_ENV
 
 const currentEnv: string | undefined = process.env.NEXT_PUBLIC_APP_ENV
 
@@ -13,6 +14,7 @@ const isTest: boolean = currentEnv === 'test'
 
 
 export {
+  NODE_ENV,
   currentEnv,
   isDev,
   isTest,
