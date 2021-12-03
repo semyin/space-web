@@ -4,8 +4,10 @@
  */
 
 import axios, {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
+import {isServer} from "@/config/environment";
 
 const request: AxiosInstance = axios.create({
+  baseURL: isServer ? '' : '/api',
   timeout: 5 * 1000
 })
 

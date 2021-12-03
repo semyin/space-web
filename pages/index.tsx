@@ -12,7 +12,7 @@ import style from '@/styles/pages/index.module.scss'
 import {parseCookies} from "@/utils/parseCookies";
 import {getRequestAuthHeader} from "@/utils/auth";
 import request from "@/plugins/request";
-import {serverApi} from "@/api";
+import {api} from "@/api";
 import {format} from 'date-fns'
 
 
@@ -22,6 +22,10 @@ type Props = {
 }
 
 export default function Page({ articleList, hotArticleList }: Props) {
+  useEffect(() => {
+    // request.get('/web/articles')
+    getArticleList({currentPage: 2, pageSize: 10})
+  }, [])
   return (
     <section className={style.home}>
       <div className={style.wrap}>
@@ -110,9 +114,10 @@ export default function Page({ articleList, hotArticleList }: Props) {
 }
 
 async function getArticleList(params: IPage) {
+  console.log('process.browser', process.browser)
   let res: [] = []
   try {
-    const result = await request.get(serverApi.article, {
+    const result = await request.get(api.article, {
       params
     })
     res = result.data.data || []
@@ -125,7 +130,7 @@ async function getArticleList(params: IPage) {
 async function getHotArticleList() {
   let res: [] = []
   try {
-    const result = await request.get(serverApi.hotArticle)
+    const result = await request.get(api.hotArticle)
     res =  result.data.data || []
   } catch (e) {
     console.log(e)

@@ -12,11 +12,14 @@ const isDev: boolean = currentEnv === 'dev'
 
 const isTest: boolean = currentEnv === 'test'
 
+const isServer: boolean = !process.browser
+
 
 export {
   NODE_ENV,
   currentEnv,
   isDev,
   isTest,
-  isProd
+  isProd,
+  isServer
 }

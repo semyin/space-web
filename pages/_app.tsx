@@ -12,11 +12,11 @@ import 'nprogress/nprogress.css'
 import {AppContext} from "next/dist/pages/_app";
 import {IInitData, IMenu, IUserInfo} from "@/types";
 import request from "@/plugins/request";
-import {serverApi} from "@/api";
 import {CookiesProvider, useCookies} from "react-cookie";
 import {parseCookies} from "@/utils/parseCookies";
 import {cookiePrefix} from "@/config/constant";
 import {getToken} from "@/utils/auth";
+import {api} from "@/api";
 
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode
@@ -54,7 +54,7 @@ function MyApp({Component, pageProps, initData, ...other}: AppPropsWithLayout) {
 
 async function getMenuList() {
   try {
-    const res = await request.get(serverApi.menu)
+    const res = await request.get(api.menu)
     return res.data.data || []
   } catch (e) {
     console.log(e)

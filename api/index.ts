@@ -1,14 +1,16 @@
+/**
+ * @author semyin
+ * @description api请求
+ */
+
 import {appDomain, requestPrefix} from "@/config/api";
+import {isServer} from "@/config/environment";
 
-export const clientApi = {
-  menu: '/web/articleTypes',
-  article: '/web/articles',
-  login: '/web/login',
-  hotArticle: '/web/hot/articles'
-}
+const base = isServer ? appDomain + requestPrefix : ''
 
-export const serverApi = {
-  menu: appDomain + requestPrefix + clientApi.menu,
-  article: appDomain + requestPrefix + clientApi.article,
-  hotArticle: appDomain + requestPrefix + clientApi.hotArticle
+export const api = {
+  menu: base + '/web/articleTypes',
+  article: base + '/web/articles',
+  login: base + '/web/login',
+  hotArticle: base + '/web/hot/articles'
 }
