@@ -1,0 +1,20 @@
+@import "../mixin.scss";
+@import "../variables.module.scss";
+
+
+.antdBackTop {
+  bottom: 80px !important;
+}
+
+.goTopIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: green;
+  @include flex(center, center);
+  .triangle {
+    width: 20px;
+    height: 20px;
+  }
+}
+
