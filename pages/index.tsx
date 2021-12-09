@@ -15,13 +15,18 @@ type Props = {
   articleList: IArticle[],
   hotArticleList: IHotArticle[],
   latestCommentList: ILatestComment[]
-  initData: IInitData
+  initData: IInitData,
+  showLoginModal: (status: boolean) => {}
 }
 
-export default function Page({ articleList, hotArticleList, latestCommentList, initData }: Props) {
-  console.log(initData)
+export default function Page({ articleList, hotArticleList, latestCommentList, initData, showLoginModal }: Props) {
+  const login = () => {
+    showLoginModal(true)
+  }
+  console.log('渲染')
   return (
     <section className={style.home}>
+      <button onClick={login}>22222</button>
       <div className={style.wrap}>
         <div className={style.left}>
           <div className={style.articleList}>

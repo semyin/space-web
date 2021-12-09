@@ -5,7 +5,7 @@ import type {NextPage} from "next";
 
 import doConsoleEnv from "@/utils/doConsoleEnv";
 import {useRouter} from "next/router";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -33,6 +33,8 @@ function MyApp({Component, pageProps, initData, ...other}: AppPropsWithLayout) {
 
   const router = useRouter()
 
+  const [modalStatus, setModalStatus] = useState<boolean>(false)
+
   useEffect(() => {
     router.events.on('routeChangeStart', () => NProgress.start())
     router.events.on('routeChangeComplete', () => NProgress.done())
@@ -44,7 +46,12 @@ function MyApp({Component, pageProps, initData, ...other}: AppPropsWithLayout) {
   return getLayout(
     (
       <CookiesProvider>
-        <Component {...pageProps} initData={initData}/>
+        {
+          modalStatus ? (
+            <div>test</div>
+          ): ''
+        }
+        <Component {...pageProps} initData={initData} showLoginModal={setModalStatus}/>
       </CookiesProvider>
     ),
     initData
@@ -62,13 +69,13 @@ async function getMenuList() {
 }
 
 MyApp.getInitialProps = async (context: AppContext) => {
-  const menuList = await getMenuList()
-  const token = getToken(context.ctx.req)
-  const loginStatus = !!token
+  // const menuList = await getMenuList()
+  // const token = getToken(context.ctx.req)
+  // const loginStatus = !!token
   return {
     initData: {
-      menu: menuList,
-      loginStatus
+      menu: [],
+      loginStatus: false
     }
   }
 }
