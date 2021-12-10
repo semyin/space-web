@@ -1,6 +1,6 @@
 import {NextPageContext} from "next";
 
-function Error({ statusCode }: {statusCode: number}) {
+function Error({statusCode}: { statusCode: number }) {
   return (
     <p>
       {statusCode
@@ -10,9 +10,9 @@ function Error({ statusCode }: {statusCode: number}) {
   )
 }
 
-Error.getInitialProps = ({ res, err }: NextPageContext) => {
+Error.getInitialProps = ({res, err}: NextPageContext) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-  return { statusCode }
+  return {statusCode}
 }
 
 export default Error
