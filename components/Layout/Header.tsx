@@ -1,11 +1,10 @@
 import {ChangeEvent, ReactElement, useState} from "react";
 import style from '@/styles/Layout/Header.module.scss'
 import Link from "next/link";
-import {baseName} from "@/config/constant";
-import {IMenu} from "@/types";
+import {baseName, menuList} from "@/config/constant";
 import classNames from "classnames";
 
-const Header = ({menu, loginStatus = false}: { menu: Array<IMenu>, loginStatus?: boolean }): ReactElement => {
+const Header = ({loginStatus = false}: { loginStatus?: boolean }): ReactElement => {
 
   const [inputValue, setInputValue] = useState<string>('')
 
@@ -28,13 +27,18 @@ const Header = ({menu, loginStatus = false}: { menu: Array<IMenu>, loginStatus?:
           </div>
           <div className={style.menuList}>
             <ul className='list-style-none'>
-              {menu.map(item => (
+              {menuList.map(item => (
                 <li key={item.id}>
                   <Link href={`/articleTypes/${item.id}`}>
                     <a>{item.typeName}</a>
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href={'/tags'}>
+                  <a>标签</a>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -51,7 +55,7 @@ const Header = ({menu, loginStatus = false}: { menu: Array<IMenu>, loginStatus?:
           </div>
           <div className={style.user}>
             {
-              loginStatus ? <img className={style.notLogin} src={'/assets/img/user.svg'} /> : '登录'
+              loginStatus ? <img className={style.notLogin} src={'/assets/img/user.svg'}/> : '登录'
             }
           </div>
         </div>

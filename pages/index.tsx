@@ -9,7 +9,6 @@ import request from "@/plugins/request";
 import {api} from "@/api";
 import {format} from 'date-fns'
 
-
 type Props = {
   articleList: IArticle[],
   hotArticleList: IHotArticle[],
@@ -17,11 +16,10 @@ type Props = {
 }
 
 export default function Page({articleList, hotArticleList, latestCommentList}: Props) {
-
   return (
     <Layout title={'首页'}>
       <>
-        <Header menu={[]} loginStatus={false}/>
+        <Header loginStatus={false}/>
         <section className={style.home}>
           <div className={style.wrap}>
             <div className={style.left}>
