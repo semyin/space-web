@@ -6,6 +6,7 @@ import { GetServerSideProps } from 'next';
 type Props = {};
 
 export default function Page({}: Props) {
+
   return (
     <Layout title={'首页'}>
       <>
@@ -17,6 +18,7 @@ export default function Page({}: Props) {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log(context)
   return {
     props: {},
   };

@@ -22,10 +22,14 @@ a {
  */
 #nprogress .bar {
     background: $base-color !important;
+    height: 1px !important;
 }
 
 body {
-  background: #f7f7f7;
+  background: white;
+  height: 100%;
+  font-family: 'PingHei', 'PingFang SC', Helvetica Neue, 'Work Sans', 'Hiragino Sans GB', 'Microsoft YaHei', SimSun, sans-serif;
+  color: rgba(0, 0, 0, 0.5);
 }
 
 .list-style-none {

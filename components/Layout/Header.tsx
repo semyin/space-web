@@ -1,63 +1,84 @@
-import { ChangeEvent, ReactElement, useState } from 'react';
+import {ChangeEvent, ReactElement, useState} from 'react';
 import style from '@/styles/Layout/Header.module.scss';
 import Link from 'next/link';
-import { baseName, menuList } from '@/config/constant';
-import classNames from 'classnames';
+import Image from "next/image";
+import {useRouter} from "next/router";
 
-const Header = (): ReactElement => {
+type Props = {
+  current?: string
+}
+
+const Header = (props: Props): ReactElement => {
+
+  const router = useRouter()
+
+  const current = props.current ? props.current : router.asPath
+
   const [inputValue, setInputValue] = useState<string>('');
 
-  const [isBlur, setIsBlur] = useState<boolean>(false);
+  const NavList = [
+    {
+      href: '/',
+      text: '首页'
+    },
+    {
+      href: '/program',
+      text: '编程'
+    },
+    {
+      href: '/achieves',
+      text: '归档'
+    },
+    {
+      href: '/links',
+      text: '友链'
+    },
+    {
+      href: '/about',
+      text: '关于'
+    }
+  ]
 
-  const searchContainerClass = classNames({
-    [style.search]: true,
-    [style.searchActive]: isBlur,
-  });
+
+  const generateNav = () => {
+    return NavList.map((item, index) => {
+      return (
+        <li key={index}>
+          <Link href={item.href}>
+            <a className={current === item.href ? style.current : ''}>{item.text}</a>
+          </Link></li>
+      )
+    })
+  }
 
   return (
     <header className={style.navHeader}>
-      <nav className={style.nav}>
+      <nav>
         <div className={style.left}>
-          <div className={style.logo}>
-            <Link href={'/'}>
-              <a>{baseName}</a>
-            </Link>
-          </div>
-          <div className={style.menuList}>
-            <ul className="list-style-none">
-              {menuList.map((item) => (
-                <li key={item.id}>
-                  <Link href={`/articleTypes/${item.id}`}>
-                    <a>{item.typeName}</a>
-                  </Link>
-                </li>
-              ))}
-              <li>
-                <Link href={'/tags'}>
-                  <a>标签</a>
-                </Link>
-              </li>
-            </ul>
-          </div>
+          {generateNav()}
         </div>
         <div className={style.right}>
-          <div className={searchContainerClass}>
+
+          <div className={style.search}>
             <input
-              className={isBlur ? style.inputBlur : ''}
-              onFocus={() => setIsBlur(true)}
-              onBlur={() => setIsBlur(false)}
               type="text"
               value={inputValue}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setInputValue(e.target.value)
               }
             />
+            <Image
+              className={style.searchIcon}
+              width={20}
+              height={20}
+              alt={''}
+              title={''}
+              src={'/assets/img/search.png'}/>
           </div>
-          <div className={style.user}></div>
         </div>
       </nav>
     </header>
   );
-};
+}
 
 export default Header;
