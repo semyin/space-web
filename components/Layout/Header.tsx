@@ -63,14 +63,15 @@ const Header = (props: Props): ReactElement => {
             <input
               type="text"
               value={inputValue}
+              placeholder={'search...'}
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setInputValue(e.target.value)
               }
             />
             <Image
               className={style.searchIcon}
-              width={20}
-              height={20}
+              width={18}
+              height={18}
               alt={''}
               title={''}
               src={'/assets/img/search.png'}/>
