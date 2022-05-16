@@ -1,11 +1,10 @@
-import {toBase64} from "next/dist/shared/lib/to-base-64";
 import {IMenu} from "@/types";
 
 const baseName: string = 'SEMYIN'
 
 const baseTitle: string = baseName +'\'s space'
 
-const cookiePrefix = toBase64('space-web') // c3BhY2Utd2Vi
+const cookiePrefix = 'c3BhY2Utd2Vi' // c3BhY2Utd2Vi space-web
 
 const Authorization = 'Authorization'
 
