@@ -1,5 +1,6 @@
 import '../styles/globals.scss'
 import 'animate.css';
+import 'font-awesome/css/font-awesome.css'
 import type {AppProps} from 'next/app'
 import type {NextPage} from "next";
 

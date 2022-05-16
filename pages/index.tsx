@@ -1,7 +1,9 @@
+import React from "react";
 import Layout from '@/components/Layout/Layout';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
-import {InferGetServerSidePropsType} from 'next';
+import ArticleList from "@/components/ArticleList/ArticleList";
+import {InferGetServerSidePropsType, NextPage} from 'next';
 import {articles} from "@/api";
 import {IArticle} from "@/types";
 import {GetServerSidePropsContext} from "next/types";
@@ -13,7 +15,7 @@ function Page({articleList}: InferGetServerSidePropsType<typeof getServerSidePro
       <>
         <Header/>
         <section>
-
+          <ArticleList list={articleList}/>
         </section>
         <Footer/>
       </>
