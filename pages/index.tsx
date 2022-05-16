@@ -3,10 +3,9 @@ import Layout from '@/components/Layout/Layout';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import ArticleList from "@/components/ArticleList/ArticleList";
-import {InferGetServerSidePropsType, NextPage} from 'next';
+import {InferGetServerSidePropsType} from 'next';
 import {articles} from "@/api";
 import {IArticle} from "@/types";
-import {GetServerSidePropsContext} from "next/types";
 
 function Page({articleList}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
@@ -23,14 +22,14 @@ function Page({articleList}: InferGetServerSidePropsType<typeof getServerSidePro
   );
 }
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  let articleList: Array<IArticle> = [];
+export const getServerSideProps = async () => {
+  let articleList: Array<IArticle>;
   const params = {
     currentPage: 1,
     pageSize: 10
-  }
-  const res = await articles(params)
-  articleList = res.data.data
+  };
+  const res = await articles(params);
+  articleList = res.data.data;
   return {
     props: {
       articleList
