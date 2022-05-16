@@ -3,43 +3,45 @@
 
 .footer {
   width: 100%;
-  background: #555;
-  color: white;
+  @include flex(center, center);
+  position: absolute;
+  height: 60px;
+  bottom: 0;
+  left: 0;
 
-  .bg {
-    width: 1100px;
-    margin: 0 auto;
-    height: 60px;
-    line-height: 60px;
+  > div {
+    width: 60%;
+    padding: 0 30px;
     @include flex(center, space-between);
+  }
 
-    .left {
-      @include flex(center, center);
+  .desc {
+    font-size: 14px;
 
-      .logo {
-        font-size: 20px;
-      }
-
-      .copyRight {
-        font-size: 14px;
-        margin-left: 30px;
-      }
-
-      .icp {
-        font-size: 14px;
-        margin-left: 30px;
-      }
+    a {
+      color: rgb(3, 111, 185);
     }
 
-    .right {
-      a {
-        text-decoration: underline;
-      }
+    span {
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+}
 
-      a:hover {
+@media screen and (max-width: 960px) {
+  .footer {
+    @include flex(center, flex-start);
+    height: 100px;
+    border-top: 1px solid #f2f2f2;
 
-        color: $base-color;
-      }
+    > div {
+      width: 100%;
+      display: block;
+    }
+
+    .desc:last-child {
+      margin-top: 10px;
     }
   }
 }

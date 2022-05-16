@@ -16,13 +16,14 @@
     width: 60%;
     height: 61px;
     @include flex(center, space-between);
+    padding: 0 30px;
 
     li {
       list-style: none;
     }
 
     .left {
-      padding: 18px 30px;
+      padding: 18px 0;
       height: 100%;
 
       li {

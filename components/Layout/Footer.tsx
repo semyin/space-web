@@ -1,24 +1,28 @@
 import {ReactElement} from "react";
+import Link from "next/link";
 import style from '@/styles/Layout/Footer.module.scss'
+import {DOMAIN} from "@/config/constant";
+import classNames from "classnames";
 
 const Footer = (): ReactElement => {
 
+  const headerClass = classNames({
+    [style.footer]: true,
+    'animate__animated': true,
+    'animate__fadeInDown': true
+  })
+
   return (
-    <footer className={style.footer}>
-      {/*<div className={style.bg}>*/}
-      {/*  <div className={style.left}>*/}
-      {/*    <div className={style.logo}>*/}
-      {/*      {baseName}*/}
-      {/*    </div>*/}
-      {/*    <div className={style.copyRight}>*/}
-      {/*      Copyright © 2018 - {new Date().getFullYear()} semyin.*/}
-      {/*    </div>*/}
-      {/*    <div className={style.icp}>粤ICP备 18145168 号</div>*/}
-      {/*  </div>*/}
-      {/*  <div className={style.right}>*/}
-      {/*    Powered By <a href="https://nextjs.org/">Next.js</a>*/}
-      {/*  </div>*/}
-      {/*</div>*/}
+    <footer className={headerClass}>
+      <div>
+        <div className={style.desc}>
+          Copyright © {new Date().getFullYear()} <Link href={'https://' + DOMAIN}><a>{DOMAIN}</a></Link>
+        </div>
+        <div className={style.desc}>
+          <Link href={'https://' + DOMAIN}><a>RSS订阅</a></Link>
+          <span>Powered by <Link href={'https://nextjs.org'}><a target={'_blank'}>Next.js</a></Link></span>
+        </div>
+      </div>
     </footer>
   )
 
