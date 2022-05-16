@@ -1,25 +1,39 @@
 import Layout from '@/components/Layout/Layout';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
-import { GetServerSideProps } from 'next';
+import {InferGetServerSidePropsType} from 'next';
+import {articles} from "@/api";
+import {IArticle} from "@/types";
+import {GetServerSidePropsContext} from "next/types";
 
-type Props = {};
-
-export default function Page({}: Props) {
+function Page({articleList}: InferGetServerSidePropsType<typeof getServerSideProps>) {
 
   return (
     <Layout title={'首页'}>
       <>
-        <Header />
-        <Footer />
+        <Header/>
+        <section>
+
+        </section>
+        <Footer/>
       </>
     </Layout>
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  console.log(context)
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  let articleList: Array<IArticle> = [];
+  const params = {
+    currentPage: 1,
+    pageSize: 10
+  }
+  const res = await articles(params)
+  articleList = res.data.data
   return {
-    props: {},
+    props: {
+      articleList
+    },
   };
 };
+
+export default Page
