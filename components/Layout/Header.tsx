@@ -3,6 +3,7 @@ import style from '@/styles/Layout/Header.module.scss';
 import Link from 'next/link';
 import Image from "next/image";
 import {useRouter} from "next/router";
+import classNames from "classnames";
 
 type Props = {
   current?: string
@@ -51,8 +52,14 @@ const Header = (props: Props): ReactElement => {
     })
   }
 
+  const headerClass = classNames({
+    [style.navHeader]: true,
+    'animate__animated': true,
+    'animate__fadeInDown': true
+  })
+
   return (
-    <header className={style.navHeader}>
+    <header className={headerClass}>
       <nav>
         <div className={style.left}>
           {generateNav()}
