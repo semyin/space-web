@@ -31,7 +31,7 @@ function MyApp({Component, pageProps}: AppPropsWithLayout) {
   return (
     <div className='_app'>
       <CookiesProvider>
-        <Component {...pageProps} />
+        <Component key={router.asPath} {...pageProps} />
       </CookiesProvider>
     </div>
 
