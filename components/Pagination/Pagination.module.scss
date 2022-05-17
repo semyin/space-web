@@ -1,0 +1,43 @@
+@import '../../styles/mixin.scss';
+@import '../../styles/variables.module.scss';
+
+.page {
+  margin: 20px auto;
+  width: 60%;
+  padding: 0 30px;
+  @include flex(center, space-between);
+}
+
+.pageBtn {
+  button {
+    padding: 0.5em 1.25em;
+    line-height: 1.666em;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 14px;
+    color: #868686;
+    font-weight: 400;
+    border-radius: 999em;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: all linear 0.2s;
+    &:hover {
+      color: #464545;
+      font-size: 14px;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid #464545;
+      white-space: nowrap;
+      font-weight: 400;
+      border-radius: 999em;
+      transition: all linear 0.2s;
+    }
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .page {
+    width: 100%;
+  }
+}
