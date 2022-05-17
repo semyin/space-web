@@ -27,21 +27,26 @@ const ArticleItem: React.FC<Props> = ({article}: { article: IArticle }) => {
       <div className={style.brief}>{article.brief}</div>
       <div className={style.iconList}>
         <div className={style.date}>
-          <i className={'fa fa-sun-o'} />
+          <i className={'fa fa-sun-o'}/>
           <span>{formatDate(article.createdAt)}</span>
         </div>
         <div className={style.comment}>
-          <i className={'fa fa-comment-o'} />
+          <i className={'fa fa-comment-o'}/>
           <span><Link href={'/post/' + article.id + '#comment'}>
             <a>Comments</a>
           </Link></span>
         </div>
         <div className={style.tag}>
-          <i className={'fa fa-tag'} />
+          {article.tagList.length > 0 ? <i className={'fa fa-tag'}/> : null}
           {
             article.tagList.map(item => {
-              return <span key={item.tagId}
-                className={style.tagItem}><Link href={'/tag/' + item.tagId}><a>{item.tagName}</a></Link></span>
+              return <span
+                key={item.tagId}
+                className={style.tagItem}>
+                <Link href={'/tag/' + item.tagId}>
+                  <a>{item.tagName}</a>
+                </Link>
+              </span>
             })
           }
         </div>
